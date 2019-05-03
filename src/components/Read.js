@@ -4,19 +4,29 @@ import axios from "axios"
 import Delete from './Delete'
 import {Table} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
+import Create from './Create'
+
 
 
 const HistoryDiv = styled.div `
 display: flex
-width: 40%
+width: 100%
 height: 100%
 padding: 20
-border-right: 1px solid black
-
 `
 
 const Contentdiv = styled.div `
+width: 65%
+
+
+`
+
+
+const ButtonDiv = styled.div `
 width: 100%
+margin-left: 250px
+display: flex
+
 `
 
 export default class Read extends Component {
@@ -27,7 +37,7 @@ export default class Read extends Component {
       Tracker: []};
     }
 
-    getData(){
+   getData(){
       axios.get("http://localhost:4000/")
       .then (response => {
         this.setState({
@@ -45,9 +55,11 @@ export default class Read extends Component {
   render() {
     
     return (
-        <HistoryDiv>
-        <Contentdiv><h3>Workout History</h3>
-        <Table striped bordered hover size="sm">
+        <HistoryDiv style={{}}>
+        <Contentdiv>
+        <ButtonDiv style={{justifyContent: 'space-between', paddingBottom: 30, paddingTop: 30,}}><h3>Workout History </h3> <Create style={{paddingBottom: 70}}></Create></ButtonDiv>
+        
+        <Table striped bordered hover size="sm" style={{marginLeft: 250}}>
           <thead>
             <tr>
               <th>Date</th>
@@ -56,6 +68,7 @@ export default class Read extends Component {
               <th>Weight</th>
               <th>Reps</th>
               <th>Sets</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
@@ -68,7 +81,7 @@ export default class Read extends Component {
                   <td >{Tracker.weight}</td>
                   <td >{Tracker.reps}</td>
                   <td >{Tracker.sets}</td>
-                  <Delete/>
+                  <td><Delete/></td>
                 </tr> 
                 ))}
             </tbody> 

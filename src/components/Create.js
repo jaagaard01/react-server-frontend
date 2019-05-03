@@ -1,22 +1,26 @@
 import React, { Component } from 'react'
-import {Button} from 'react-bootstrap'
+import {Button, Modal,} from 'react-bootstrap'
 import styled from 'styled-components';
 import axios from "axios"
 
 
 const DivForm = styled.div `
-border: 1px solid black
 display:flex;
-width: 60%
-height: 30%
-padding: 10px
+width: 100%
+height: 100%
+padding: 5px
 
 
 `
 
 export default class Create extends Component {
-    constructor(props) {
-        super(props)
+    constructor(props, context) {
+        super(props, context)
+      
+      
+      this.handleShow = this.handleShow.bind(this);
+      this.handleClose = this.handleClose.bind(this);
+
         this.state={
           exercise: '',
           date: '',
@@ -24,9 +28,22 @@ export default class Create extends Component {
           reps: '',
           bodytype: '',
           sets: '',
+          show: false
     
         }
       }
+      
+      
+
+      handleClose() {
+        this.setState({ show: false });
+      }
+    
+      handleShow() {
+        this.setState({ show: true });
+      }
+
+
 
 
       handleInputChange = (event) => {
@@ -38,9 +55,6 @@ export default class Create extends Component {
      }
     
           handleSubmit = (event) => {
-            event.preventDefault();
-          
-
             axios.post("http://localhost:4000/Create", this.state)
             .then(res => {
               console.log(res);
@@ -50,14 +64,28 @@ export default class Create extends Component {
             
           } 
     
-         
+  modalSubmit = () => {
+    this.handleSubmit();
+    this.handleClose(); 
+  }
         
 
   render() {
     console.log(this.state)
     return (
-        <DivForm>
-        <form onSubmit={this.handleSubmit} class="form-row">
+        <div>
+          <Button variant="primary" onClick={this.handleShow} style={{display: "flex"}}>
+          Add Your Workout
+        </Button>
+        <Modal show={this.state.show} onHide={this.handleClose} size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered>
+        <Modal.Header closeButton>
+            <Modal.Title>Create New Workout</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+          <DivForm>
+        <form class="form-row">
             <div class="form-group col-md-6" >
             <label for="exercise">Excerise</label>
             <input type="text" class="form-control" name="exercise"  onChange={this.handleInputChange} placeholder="Exercise"></input>
@@ -90,11 +118,15 @@ export default class Create extends Component {
             <label for="Sets">Sets</label>
             <input type="Number" name="sets"class="form-control" onChange={this.handleInputChange} placeholder="Sets"></input>
          </div>
+         
             <div class="text-center">
-            <Button type="submit" className="text-right" onClick={(e) => this.handleSubmit(e)}>Add Your Workout!</Button>
+            <Button type="submit" className="text-right" onClick={(e) => this.modalSubmit(e)}>Add Your Workout!</Button>
             </div>
         </form>
       </DivForm>
+      </Modal.Body>
+      </Modal>
+      </div>
     )
   }
 }
