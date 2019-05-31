@@ -6,19 +6,21 @@ import {Link} from 'react-router-dom'
 
 
 const DivForm = styled.div `
-border: 1px solid black
+border: 1px solid black;
 display:flex;
-width: 50%
-height: 40%
-padding: 10px
+width: 50%;
+height: 40%;
+padding: 10px;
 
 `
 
 const FullScreenDiv = styled.div `
 
-height: 100%
-width: 100%
-display: flex
+height: 100%;
+width: 100%;
+display: flex;
+background-image: linear-gradient(#94AFFF, white);
+
 `
 
 export default class Edit extends Component {
@@ -75,15 +77,15 @@ export default class Edit extends Component {
     return (
       <FullScreenDiv style={{flexDirection: "column", justifyContent: 'center', alignItems:'center', }}>
       <h2 style={{marginTop: 50}}>Update your Workout</h2>
-      <DivForm style={{marginTop: 150}} >
-        <form onSubmit={this.handleSubmit} class="form-row">
+      <DivForm style={{marginTop: 150, backgroundColor: 'transparent'}} >
+        <form onSubmit={this.handleSubmit} class="form-row" style={{backgroundColor: 'transparent'}}>
             <div class="form-group col-md-6" >
             <label for="exercise">Excerise</label>
-            <input type="text" class="form-control" name="exercise"  onChange={this.handleInputChange} placeholder="Exercise" value={this.state.Tracker.exercise}></input>
+            <input type="text" style={{backgroundColor: 'transparent'}} class="form-control" name="exercise"  onChange={this.handleInputChange} placeholder="Exercise" value={this.state.Tracker.exercise}></input>
             </div>
             <div class="form-group col-md-6">
             <label for="BodyType">Body Part</label>
-            <select class="custom-select" name="bodytype" onChange={this.handleInputChange} value={this.state.Tracker.bodytype}>
+            <select class="custom-select" name="bodytype" style={{backgroundColor: 'transparent'}} onChange={this.handleInputChange} value={this.state.Tracker.bodytype}>
               <option selected>Select</option>
               <option value="Chest">Chest</option>
               <option value="Legs">Legs</option>
@@ -95,19 +97,19 @@ export default class Edit extends Component {
           </div>
         <div class="form-group col-md-3">
           <label for="date">Date</label>
-            <input type="Date" name="date" class="form-control" onChange={this.handleInputChange} value={this.state.Tracker.date} ></input>
+            <input type="Date" name="date" style={{backgroundColor: 'transparent'}} class="form-control" onChange={this.handleInputChange} value={this.state.Tracker.date} ></input>
         </div>
         <div class="form-group col-md-3">
           <label for="Weight">Weight</label>
-            <input type="Number" name="weight" class="form-control" onChange={this.handleInputChange} placeholder="Weight" value={this.state.Tracker.weight}></input>
+            <input type="Number" name="weight" class="form-control" style={{backgroundColor: 'transparent'}} onChange={this.handleInputChange} placeholder="Weight" value={this.state.Tracker.weight}></input>
         </div>
         <div class="form-group col-md-3"> 
           <label for="Reps">Reps</label>
-            <input type="Number" name="reps"class="form-control" onChange={this.handleInputChange} placeholder="Reps" value={this.state.Tracker.reps}></input>
+            <input type="Number" name="reps"class="form-control" style={{backgroundColor: 'transparent'}} onChange={this.handleInputChange} placeholder="Reps" value={this.state.Tracker.reps}></input>
         </div>
         <div class="form-group col-md-3"> 
             <label for="Sets">Sets</label>
-            <input type="Number" name="sets"class="form-control" onChange={this.handleInputChange} placeholder="Sets" value={this.state.Tracker.sets}></input>
+            <input type="Number" name="sets"class="form-control" style={{backgroundColor: 'transparent'}} onChange={this.handleInputChange} placeholder="Sets" value={this.state.Tracker.sets}></input>
          </div>
             <div class="text-center">
             <Button type="submit" className="text-right" onClick={(e) => this.handleSubmit(e)}>Update your Workout</Button>

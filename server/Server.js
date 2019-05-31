@@ -24,22 +24,26 @@ app.use(cors())
 /// get all entries
 app.get('/', async (req, res) => {
     const result = await collection.find({})
+    console.log('get called')
     return res.status(200).send(result)})
 
 /// get a single entry
 app.get('/Edit/:id', async (req, res) => {
     const [result] = await collection.find(req.params.id)
+    console.log('g2 called')
     return res.status(200).send(result)})
 
 /// add to entries
 app.post('/Create', async (req, res) => {
     const result = await collection.insert(req.body)
+    console.log('post called')
     return res.status(200).send(result)
 })
 
 /// delete an entry
 app.delete('/Delete/:id', async (req, res) => {
-    await collection.findOneAndDelete(req.body)
+    await collection.findOneAndDelete({_id: req.params.id})
+    console.log('delete called')
     return res.status(200).send(await collection.find())
 })
 

@@ -6,10 +6,9 @@ import axios from "axios"
 
 const DivForm = styled.div `
 display:flex;
-width: 100%
-height: 100%
-padding: 5px
-
+width: 100%;
+height: 100%;
+padding: 5px;
 
 `
 
@@ -79,7 +78,8 @@ export default class Create extends Component {
         </Button>
         <Modal show={this.state.show} onHide={this.handleClose} size="lg"
         aria-labelledby="contained-modal-title-vcenter"
-        centered>
+        centered
+        >
         <Modal.Header closeButton>
             <Modal.Title>Create New Workout</Modal.Title>
           </Modal.Header>

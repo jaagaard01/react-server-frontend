@@ -10,7 +10,7 @@ import Read from'./components/Read'
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter className="App">
           <Route exact path="/" component={Home} />
           <Route path="/Create" component={Create} />
           <Route path="/Delete" component={Delete} />

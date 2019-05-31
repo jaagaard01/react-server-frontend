@@ -7,38 +7,34 @@ export default class Delete extends Component {
     super(props);
     this.state = {
       Tracker: [],
-      id: ""
+      id: props.id
     };
   }
 
+  
+
   handleSubmit = async event => {
+    console.log(this.props)
     await axios
-      .delete(`http://localhost:4000/delete/${this.state._id}`)
+      .delete(`http://localhost:4000/Delete/${this.state.id}`)
       .then(res => {
         console.log(res);
       })
       .catch(err => {
         console.log(err);
-      });
-      await this.getData()
-  };
+      })
+      
+      if(this.props.onDeleted)
+        this.props.onDeleted()
+
+    };
+    
+      
+
+  
   
 
-  async getData() {
-    return axios
-      .get("http://localhost:4000/")
-      .then(response => {
-        this.setState({
-          Tracker: response.data
-        });
-      })
-      .catch(error => this.setState({ error, isLoading: false }));
-  }
-
-  handleDelete = async () => {
-    this.handleSubmit();
-    this.getData();
-  };
+  
 
 
   render() {
@@ -47,7 +43,7 @@ export default class Delete extends Component {
         <Button
           type="submit"
           className="text-right"
-          onClick={e => this.handleDelete(e)}
+          onClick={e => this.handleSubmit(e)}
         >
           Delete
         </Button>
